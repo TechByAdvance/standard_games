@@ -4,9 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 10px;
+            line-height: 2.5;
+        }
+    </style>
     <title>数当てゲーム</title>
 </head>
 <body>
-    
+    <h1>数当てゲームの遊び方</h1>
+    <ol>
+        <li>コンソールを開きます。</li>
+        <li>1〜100の中から、正解の数字が何かを予想してください。<br>予想した数字が50だった場合は、コンソールに「judge(50)」と入力すると、正誤判定されます。</li>
+        <li>メッセージをヒントにして、正解の数字を当ててください。</li>
+        <li>ゲームをやり直す場合は、ページを再読み込み（リロード）してください。</li>
+    </ol>
+
+    <script>
+        let correctAnswer = Math.floor(Math.random() * 100) + 1;
+
+        console.log("1〜100の中から正解の数字を当ててください。");
+
+        function judge(playerAnswer) {
+            if (playerAnswer < correctAnswer) {
+                return "答えはもっと大きい数字です。"
+            } else if (playerAnswer > correctAnswer) {
+                return "答えはもっと小さい数字です。"
+            } else {
+                return "正解です！";
+            }
+        }
+    </script>
 </body>
 </html>
