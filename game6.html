@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クイズゲーム</title>
+    <style>
+        .container {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #efefef;
+        }
+        h1 {
+            font-size: 1em;
+            margin: 0;
+        }
+        input {
+            height: 30px;
+            width: 60%;
+            margin: 20px 0;
+        }
+        button {
+            display: block;
+            border: 1px solid #424242;
+            border-radius: 5px;
+            height: 30px;
+            margin: 10px 0;
+            width: 100%;
+            cursor: pointer;
+        }
+        .correctAnswer {
+            color: #000000;
+            background-color: #C5E1A5;
+        }
+        .incorrectAnswer {
+            color: #000000;
+            background-color: #BDBDBD;
+        }
+        .result {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .nextButton {
+            background-color: #0277BD;
+            color: #ffffff;
+        }
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="title">第1問</h1>
+        <p id="question">ここにクイズの問題文</p>
+        <button class="answerButton">選択肢1</button>
+        <button class="answerButton">選択肢2</button>
+        <button class="answerButton">選択肢3</button>
+        <button class="answerButton">選択肢4</button>
+        <div id="resultContainer">
+            <div class="result" id="result">結果</div>
+            <button id="nextButton" class="nextButton">次の問題へ</button>
+        </div>
+    </div>
+
+    <script>
+        let quiz = [
+            {
+                question: "Webページのデザインをするための言語は？",
+                answers: ["HTML", "CSS", "JavaScript", "Java"],
+                correctAnswer: "CSS"
+            }, {
+                question: "JavaScriptの文法のうち、繰り返しに用いるものは？",
+                answers: ["変数", "関数", "if文", "for文"],
+                correctAnswer: "for文"
+            }
+        ];
+        let quizIndex = 0;
+        let $title = document.getElementById("title");
+        let $question = document.getElementById("question");
+        let $answerButtons = document.getElementsByClassName("answerButton");
+        
+        let $result = document.getElementById("result");
+        let $nextButton = document.getElementById("nextButton");
+        let $resultContainer = document.getElementById("resultContainer");
+        
+        // 問題文と選択肢を表示する (step2)
+        let setup = function(quizIndex) {
+            $question.innerHTML = quiz[quizIndex].question;
+            $title.innerHTML = "第" + (quizIndex + 1) + "問";
+            for(let i = 0; i < 4; i++) {
+                $answerButtons[i].innerHTML = quiz[quizIndex].answers[i];    
+            }
+            $resultContainer.classList.add("hide");
+            for (let i = 0; i < 4; i++) {
+                $answerButtons[i].disabled = false;
+                $answerButtons[i].classList.remove("correctAnswer");
+                $answerButtons[i].classList.remove("incorrectAnswer");
+            }
+        }
+
+        let inactivateButtons = function() {
+            for (let i = 0; i < 4; i++) {
+                $answerButtons[i].disabled = true;
+                if ($answerButtons[i].innerHTML == quiz[quizIndex].correctAnswer) {
+                    $answerButtons[i].classList.add("correctAnswer");
+                }
+            }
+        }
+
+        setup(quizIndex);
+
+        // 選択肢ボタンが押されたときの処理
+        for (let i = 0; i < 4; i++) {
+            $answerButtons[i].addEventListener("click", function (){
+                if ($answerButtons[i].innerHTML == quiz[quizIndex].correctAnswer) {
+                    $result.innerHTML = "正解！"
+                } else {
+                    $result.innerHTML = "残念！"
+                    $answerButtons[i].classList.add("incorrectAnswer");
+                }
+                $resultContainer.classList.remove("hide");
+                inactivateButtons();
+            });
+        }
+
+        // 次の問題へボタンが押された時の処理
+        $nextButton.addEventListener("click", function() {
+            quizIndex++;
+            if (quizIndex == quiz.length) {
+                quizIndex = 0;
+            }
+            setup(quizIndex);
+        });
+        </script>
+</body>
+</html>

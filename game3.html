@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クイズゲームのUI</title>
+    <style>
+        .container {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #efefef;
+        }
+        h1 {
+            font-size: 1em;
+            margin: 0;
+        }
+        input {
+            height: 30px;
+            width: 60%;
+            margin: 20px 0;
+        }
+        button {
+            display: block;
+            border: 1px solid #424242;
+            border-radius: 5px;
+            height: 30px;
+            margin: 10px 0;
+            width: 100%;
+            cursor: pointer;
+        }
+        .correctAnswer {
+            color: #000000;
+            background-color: #C5E1A5;
+        }
+        .incorrectAnswer {
+            color: #000000;
+            background-color: #BDBDBD;
+        }
+        .result {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .nextButton {
+            background-color: #0277BD;
+            color: #ffffff;
+        }
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>第1問</h1>
+        <p>ここにクイズの問題文</p>
+        <button class="answerButton">選択肢1</button>
+        <button class="answerButton incorrectAnswer">選択肢2</button>
+        <button class="answerButton">選択肢3</button>
+        <button class="answerButton correctAnswer">選択肢4</button>
+        <div>
+            <div class="result">結果</div>
+            <button class="nextButton">次の問題へ</button>
+        </div>
+    </div>
+</body>
+</html>
