@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>名前占い</title>
+    <style>
+        body {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 10px;
+            line-height: 2.5;
+        }
+    </style>
+</head>
+<body>
+    <h1>名前占い</h1>
+    <ol>
+        <li>コンソールを開きます。</li>
+        <li>コンソールに「judge("〇〇")」と入力すると、あなたの前世を占います。<br>〇〇には占いたい名前を入れてください。</li>
+    </ol>
+
+    <script>
+        let fortune = ["犬", "猫", "鳥"];
+
+        function judge(name) {
+            let sum = 0;
+            for (let i = 0; i < name.length; i++) {
+                sum += name.charCodeAt(i);
+            }
+            return "あなたの前世は" + fortune[sum % fortune.length] + "です。";
+        }
+    </script>
+</body>
+</html>

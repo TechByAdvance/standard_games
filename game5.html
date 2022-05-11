@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クイズゲーム</title>
+    <style>
+        .container {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #efefef;
+        }
+        h1 {
+            font-size: 1em;
+            margin: 0;
+        }
+        input {
+            height: 30px;
+            width: 80%;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        button {
+            border: 1px solid #424242;
+            border-radius: 3px;
+            height: 30px;
+            margin: 10px 0;
+            width: 15%;
+            cursor: pointer;
+        }
+        .correctAnswer {
+            color: #000000;
+            background-color: #C5E1A5;
+        }
+        .incorrectAnswer {
+            color: #000000;
+            background-color: #BDBDBD;
+        }
+        .result {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .nextButton {
+            width: 100%;
+            background-color: #0277BD;
+            color: #ffffff;
+        }
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="title">第1問</h1>
+        <p id="question">ここにクイズの問題文</p>
+        <input type="text" id="answerForm">
+        <button id="answerButton">回答</button>
+        <div id="resultContainer">
+            <div class="result" id="result">結果</div>
+            <button id="nextButton" class="nextButton">次の問題へ</button>
+        </div>
+    </div>
+
+    <script>
+        let quiz = [
+            {
+                question: "Webページのデザインをするための言語は？",
+                correctAnswer: "CSS"
+            }, {
+                question: "JavaScriptの文法のうち、繰り返しに用いるものは？",
+                correctAnswer: "for文"
+            }
+        ];
+        let quizIndex = 0;
+        let $title = document.getElementById("title");
+        let $question = document.getElementById("question");
+        let $answerButton = document.getElementById("answerButton");
+        let $answerForm = document.getElementById("answerForm");
+        let playerAnswer;
+        
+        let $result = document.getElementById("result");
+        let $nextButton = document.getElementById("nextButton");
+        let $resultContainer = document.getElementById("resultContainer");
+
+        // 問題文を表示する
+        function setup(quizIndex) {
+            $title.innerHTML = "第" + (quizIndex + 1) + "問";
+            $question.innerHTML = quiz[quizIndex].question;
+            $answerForm.value = "";
+        }
+
+        setup(quizIndex);
+
+        $answerButton.addEventListener("click", function() {
+            playerAnswer = $answerForm.value;
+            if (playerAnswer == quiz[quizIndex].correctAnswer) {
+                $result.innerHTML = "正解！";
+            } else {
+                $result.innerHTML = "残念！";
+            }
+        });
+
+        $nextButton.addEventListener("click", function() {
+            quizIndex++;
+            if (quizIndex == quiz.length) {
+                quizIndex = 0;
+            }
+            setup(quizIndex);
+        });
+    </script>
+</body>
+</html>
